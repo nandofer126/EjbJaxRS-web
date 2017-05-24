@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.IdMapper">
+   <select id="getIdCliente" resultType="long">
+   	select nextval('idCliente')
+   </select>
+   <select id='getIdProducto' resultType="long">
+	    select nextval('idProducto')
+   </select>
+   <select id='getIdProveedor' resultType="long">
+	    select nextval('idProveedor')
+   </select>
+</mapper>

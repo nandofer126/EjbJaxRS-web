@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.ProductoMapper">
+
+  <resultMap type="py.pol.una.ii.pw.model.Proveedores" id="ProveedorResult">
+    <id property="id" column="id"/>
+    <result property="nombre" column="nombre"/>
+   </resultMap>
+  <resultMap type="py.pol.una.ii.pw.model.Productos" id="ProductoResult">
+    <id property="id" column="id"/>
+    <result property="nombre" column="nombre"/>
+    <result property="detalle" column="detalle"/>
+    <result property="precio" column="precio"/>
+    <result property="stock" column="stock"/>
+    <association property="proveedor" resultMap="ProveedorResult"/>
+   </resultMap>
+   
+   
+  <select id="getAllProductos" resultMap="ProductoResult">
+ select p.nombre, p.id, p.detalle, p.precio, p.stock, pr.id, pr.nombre  
+ from 
+ productos p join proveedores pr on p.proveedor_id = pr.id 
+  </select>
+  
+  
+  <select id='getProductoById' parameterType='long' resultMap="ProductoResult">
+	      select p.nombre, p.id, p.detalle, p.precio, p.stock, pr.id, pr.nombre  from productos p join proveedores pr on p.proveedor_id = pr.id
+
+	     where p.id = #{productoId}
+ </select>
+ 
+ 
+ <delete id='removeProducto' parameterType='long'>
+
+    delete from Productos where id = #{productoId}
+</delete>
+
+
+<insert id="createProducto" parameterType="py.pol.una.ii.pw.model.Productos" 
+						useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+
+insert into Productos (nombre,detalle,precio,stock,proveedor_id) values 
+							(#{nombre},#{detalle},#{precio},#{stock},#{proveedor.id})
+						
+</insert>
+
+<update id="updateProducto" parameterType="py.pol.una.ii.pw.model.Productos">
+
+	update Productos
+	set
+		detalle= #{detalle},
+		precio=  #{precio},
+		stock= #{stock},
+		proveedor= #{proveedor.id}
+	where id= #{id}
+
+</update>
+ 
+</mapper>

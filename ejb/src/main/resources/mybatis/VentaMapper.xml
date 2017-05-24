@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.VentaMapper">
+ <resultMap type="py.pol.una.ii.pw.model.Venta" id="VentaResult">
+    <id property="id" column="id"/>
+    <result property="total" column="total"/>
+    <collection javaType="java.util.LinkedList" property="productos" resultMap="mybatis.ProductoMapper.ProductoResult" />
+ </resultMap>
+ 
+ <select id="getAllVenta" resultType="py.pol.una.ii.pw.model.Venta">
+ 	select * from ventas
+ </select>
+ <select id='getVentaById' parameterType='long' resultType="py.pol.una.ii.pw.model.Venta">
+	select * from ventas where id = #{ventaId}
+ </select>
+ <insert id="createVenta" parameterType="py.pol.una.ii.pw.model.Venta" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+	insert into ventas (total) values (#{total})
+ </insert>
+ <insert id="createVentaProducto" parameterType="py.pol.una.ii.pw.service.Venta_Producto">
+	insert into ventas_productos (ventas_id,productos_id) values (#{idventa},#{idproducto})
+ </insert>
+ <select id='getIdVenta' resultType="long">
+	select currval('idventa')
+ </select>
+ <select id='getVentaByTotal' parameterType='int' resultType="long">
+	    select id from ventas where total = #{total}
+ </select>
+</mapper>

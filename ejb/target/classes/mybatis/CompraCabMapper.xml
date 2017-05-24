@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.CompraCabMapper">
+ <resultMap type="py.pol.una.ii.pw.model.CompraCab" id="CompraResult">
+    <id property="id" column="id"/>
+    <result property="total" column="total"/>
+    <collection javaType="java.util.LinkedList" property="productos" resultMap="mybatis.ProductoMapper.ProductoResult" />
+   </resultMap>
+ 
+
+  <select id="getAllCompraCab" resultType="py.pol.una.ii.pw.model.CompraCab">
+  select * from compra_cab
+  </select>
+  
+  
+  <select id='getCompraCabById' parameterType='long' resultType="py.pol.una.ii.pw.model.CompraCab">
+	    select * from compra_cab
+	     where id = #{cabId}
+ </select>
+ 
+ 
+
+
+<insert id="createCompraCab" parameterType="py.pol.una.ii.pw.model.CompraCab" 
+						useGeneratedKeys="true" keyProperty="id">
+
+insert into compracab (total) values (#{total})
+</insert>
+<insert id="createCompraProducto" parameterType="py.pol.una.ii.pw.service.Compra_Producto">
+
+insert into compracab_productos (compracab_id,productos_id) values (#{idcompra},#{idproducto})
+						
+</insert>
+<select id='getIdCompra' resultType="long">
+	    select currval('idcompra')
+ </select>
+ <select id='getCompraCabByTotal' parameterType='int' resultType="long">
+	    select id from compracab
+	     where total = #{total}
+ </select>
+</mapper>

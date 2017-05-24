@@ -1,0 +1,5 @@
+module add --name=org.postgresql --resources=/home/kpdevila/postgresql-9.4-1203.jdbc4.jar --dependencies=javax.api,javax.transaction.api
+
+/subsystem=datasources/jdbc-driver=postgres:add(driver-name="postgres",driver-module-name="org.postgresql",driver-class-name=org.postgresql.Driver)
+
+data-source add --jndi-name=java:/webDS --name=webDS --connection-url=jdbc:postgresql://localhost/db2 --driver-name=postgres --user-name=postgres --password=postgres
