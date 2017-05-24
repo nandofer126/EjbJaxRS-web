@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 EjbJaxRS: Example Using Multiple Java EE 6 Technologies Deployed as an EAR
 ==============================================================================================
 Author: Pete Muir
@@ -125,3 +126,6 @@ If you want to debug the source code or look at the Javadocs of any library in t
 
         mvn dependency:sources
         mvn dependency:resolve -Dclassifier=javadoc
+=======
+# EjbJaxRS-web
+>>>>>>> 3664d3c4a275f0d4159d8f537a4597540fb0c61a
